@@ -5,8 +5,13 @@ import java.io.InputStreamReader;
 import app.Model.Student;
 import app.controller.IStudentController;
 import app.factory.StudentControllerFactory;
+import app.util.HiberbateUtil;
 
 public class Main {
+	static {
+		HiberbateUtil.startUp();
+	}
+
 	public static void main(String[] args) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Integer option, id;
@@ -67,42 +72,39 @@ public class Main {
 					id = Integer.parseInt(br.readLine());
 					Student studentRecord = studentController.findById(id);
 					if (studentRecord != null) {
-						Student newStudent = new Student();
-
-						newStudent.setStudentId(id);
 						System.out.println("Student old name : " + studentRecord.getName());
 						String newName = br.readLine();
 						if (newName == null || newName.equals("")) {
-							newStudent.setName(studentRecord.getName());
+							studentRecord.setName(studentRecord.getName());
 						} else {
-							newStudent.setName(newName);
+							studentRecord.setName(newName);
 						}
 
 						System.out.println("Student old email : " + studentRecord.getEmail());
 						String newEmail = br.readLine();
 						if (newEmail == null || newEmail.equals("")) {
-							newStudent.setEmail(studentRecord.getEmail());
+							studentRecord.setEmail(studentRecord.getEmail());
 						} else {
-							newStudent.setEmail(newEmail);
+							studentRecord.setEmail(newEmail);
 						}
 
 						System.out.println("Student old city : " + studentRecord.getCity());
 						String newCity = br.readLine();
 						if (newCity == null || newCity.equals("")) {
-							newStudent.setCity(studentRecord.getCity());
+							studentRecord.setCity(studentRecord.getCity());
 						} else {
-							newStudent.setCity(newCity);
+							studentRecord.setCity(newCity);
 						}
 
 						System.out.println("Student old country : " + studentRecord.getCountry());
 						String newCountry = br.readLine();
 						if (newCountry == null || newCountry.equals("")) {
-							newStudent.setCountry(studentRecord.getCountry());
+							studentRecord.setCountry(studentRecord.getCountry());
 						} else {
-							newStudent.setCountry(newCountry);
+							studentRecord.setCountry(newCountry);
 						}
 
-						status = studentController.saveorUpdate(newStudent);
+						status = studentController.saveorUpdate(studentRecord);
 						if (status.equalsIgnoreCase("success")) {
 							System.out.println("Student with id " + id + " updated successfully");
 						} else {

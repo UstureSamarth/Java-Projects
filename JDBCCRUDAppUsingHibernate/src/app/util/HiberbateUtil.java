@@ -44,4 +44,8 @@ public class HiberbateUtil {
 			sessionFactory.close();
 		}
 	}
+	
+	public static void startUp() {
+		System.out.println("*************Starting hibernate environment*************");
+	}
 }

@@ -50,7 +50,6 @@ public class StudentDaoImpl implements IStudentDao {
 			session = HiberbateUtil.getSession();
 			if (session != null) {
 				student = session.get(Student.class, id);
-				session.evict(student);
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
